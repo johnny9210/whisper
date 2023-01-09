@@ -53,13 +53,13 @@ def load_wave(wave_path, sample_rate:int=16000) -> torch.Tensor:
 
 
 
-train_transcripts_path = '/home/ubuntu/t/train.txt'
+train_transcripts_path = '/home/ubuntu/sample/valid.txt'
 
-test_transcripts_path = '/home/ubuntu/t/test.txt'
+test_transcripts_path = '/home/ubuntu/sample/test.txt'
 
 def get_audio_file_list(transcripts_path, text_max_length=300, audio_max_sample_length=320000, sample_rate=16000):
     audio_transcript_pair_list = []
-    audio_dir = '/home/ubuntu/t/clean'
+    audio_dir = '/home/ubuntu/sample/clean'
     with open(transcripts_path, "r") as f:
         text_list = f.readlines()
     for text in text_list:
@@ -300,7 +300,7 @@ cfg = Config()
 
 model = WhisperModelModule(cfg, model_name, lang, train_audio_transcript_pair_list, test_audio_transcript_pair_list)
 
-checkpoint_path = "/home/ubuntu/t/checkpoint/checkpoint-epoch=0029.ckpt"
+checkpoint_path = "/home/ubuntu/preprocessing/checkpoint-epoch=0029.ckpt"
 
 state_dict = torch.load(checkpoint_path)
 print(state_dict.keys())
