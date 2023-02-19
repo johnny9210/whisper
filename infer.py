@@ -3,7 +3,7 @@ import os
 import numpy as np
 
 try:
-    import tensorflow  # required in Colab to avoid protobuf compatibility issues
+    import tensorflow  
 except ImportError:
     pass
 
@@ -20,7 +20,7 @@ from pytorch_lightning.callbacks import LearningRateMonitor, ModelCheckpoint
 from pytorch_lightning.loggers import TensorBoardLogger
 
 from tqdm.notebook import tqdm
-# import pyopenjtalk
+
 import evaluate
 
 from transformers import (
@@ -30,7 +30,6 @@ from transformers import (
 
 
 
-# DATASET_DIR = "/content/jvs/jvs_ver1"
 SAMPLE_RATE = 16000
 BATCH_SIZE = 2
 TRAIN_RATE = 0.8
@@ -64,12 +63,11 @@ def get_audio_file_list(transcripts_path, text_max_length=300, audio_max_sample_
         text_list = f.readlines()
     for text in text_list:
         audio_id, text = text.replace("\n", "").split(":")
-        # print(audio_id, text)
+
 
         audio_path = audio_dir+f"/{audio_id}.wav"
         audio = load_wave(audio_path, sample_rate=sample_rate)[0]
         if len(text) > text_max_length or len(audio) > audio_max_sample_length:
-#             print(len(text), len(audio))
             continue
         audio_transcript_pair_list.append((audio_id, str(audio_path), text))
     return audio_transcript_pair_list
